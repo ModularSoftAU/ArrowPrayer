@@ -1,4 +1,5 @@
-![ArrowPrayer Logo](https://imgur.com/l4otR4x)
+<!-- ![ArrowPrayer Logo](https://imgur.com/l4otR4x) -->
+![ArrowPrayer Logo](https://github.com/crafting-for-christ/ArrowPrayer/blob/master/assets/img/arrowprayerlogo.png?raw=true)
 # ArrowPrayer
 A Discord bot to submit prayer requests for the community to pray for.
 
