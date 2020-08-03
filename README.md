@@ -5,6 +5,13 @@
 # ArrowPrayer
 A Discord bot to submit prayer requests for the community to pray for.
 
+> You can tell the Lord that you love him anytime
+> You can tell the Lord that you need him anytime
+> Thank him for his love and care
+> Shoot him up an arrow prayer
+> You can tell the Lord that you love him anytime
+> "You Can Tell The Lord That You Love Him" - Colin Buchanan
+
 ## Affiliated with Crafting For Christ
 Website: https://craftingforchrist.net/<br>
 Java IP: `play.craftingforchrist.net`<br>
