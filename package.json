@@ -1,0 +1,25 @@
+{
+  "name": "ArrowPrayer",
+  "version": "1.0.0",
+  "description": "A Discord bot to submit prayer requests for the community to pray for.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crafting-for-christ/ArrowPrayer.git"
+  },
+  "author": "Ben Robson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crafting-for-christ/ArrowPrayer/issues"
+  },
+  "homepage": "https://github.com/crafting-for-christ/ArrowPrayer",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
+    "mysql": "^2.18.1"
+  }
+}
