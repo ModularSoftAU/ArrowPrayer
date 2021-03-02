@@ -16,11 +16,6 @@ const package = require('./package.json');
 const config = require('./config.json');
 
 //
-// Controllers
-//
-// const database = require('./controllers/database');
-
-//
 // Discord Commands & Integration
 //
 // Reads all commands & boot them in.
