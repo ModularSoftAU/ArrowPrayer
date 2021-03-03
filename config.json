@@ -1,4 +1,11 @@
 {
+  "blacklistmanagementroles": [
+    "Administrator",
+    "Senior Staff"
+  ],
   "prayerchannel": "prayer-requests",
-  "blacklistedusers": []
+  "prayerlogchannel": "admin-log",
+  "blacklistedusers": [
+
+  ]
 }
