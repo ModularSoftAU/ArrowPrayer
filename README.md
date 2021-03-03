@@ -5,11 +5,11 @@
 # ArrowPrayer
 A Discord bot to submit prayer requests for the community to pray for.
 
-> You can tell the Lord that you love him anytime
-> You can tell the Lord that you need him anytime
-> Thank him for his love and care
-> Shoot him up an arrow prayer
-> You can tell the Lord that you love him anytime
+> You can tell the Lord that you love him anytime<br>
+> You can tell the Lord that you need him anytime<br>
+> Thank him for his love and care<br>
+> Shoot him up an arrow prayer<br>
+> You can tell the Lord that you love him anytime<br>
 > "You Can Tell The Lord That You Love Him" - Colin Buchanan
 
 # Commands 
@@ -19,10 +19,10 @@ A Discord bot to submit prayer requests for the community to pray for.
 | blacklist [add/remove/list] [discordid] | If people are rude or abuse the system, blacklist them by adding and removing people and listing who is currently on it. |
 
 ## Usage
-Prayer requests can be made using `.pray [request]`. Prayer requests will pop up in the channel specified under `prayerchannel`.
+Prayer requests can be made using `.pray [request]`. Prayer requests will pop up in the channel specified under `prayerchannel`.<br>
 ![](https://i.imgur.com/bercLQj.png)
 
-A copy of the prayer request is send to the specified `prayerlogchannel` to monitor users who may abuse the system.
+A copy of the prayer request is send to the specified `prayerlogchannel` to monitor users who may abuse the system.<br>
 ![](https://i.imgur.com/1HwKQDF.png)
 
 
