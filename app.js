@@ -2,7 +2,6 @@
 // Project Constants
 //
 require ('dotenv').config();
-const mysql = require('mysql');
 const Discord = require('discord.js');
 const fs = require('fs');
 const client = new Discord.Client({ disableEveryone: true });
