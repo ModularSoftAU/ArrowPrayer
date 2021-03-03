@@ -2,7 +2,6 @@
 // Project Constants
 //
 require ('dotenv').config();
-const mysql = require('mysql');
 const Discord = require('discord.js');
 const fs = require('fs');
 const client = new Discord.Client({ disableEveryone: true });
@@ -14,11 +13,6 @@ require('./util/eventLoader.js')(client);
 //
 const package = require('./package.json');
 const config = require('./config.json');
-
-//
-// Controllers
-//
-// const database = require('./controllers/database');
 
 //
 // Discord Commands & Integration
