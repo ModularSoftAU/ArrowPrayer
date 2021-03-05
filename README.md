@@ -3,6 +3,8 @@
 </p>
 
 # ArrowPrayer
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1becec0c6d364f14847c56d9c2e4e186)](https://www.codacy.com/gh/craftingforchrist/ArrowPrayer/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=craftingforchrist/ArrowPrayer&amp;utm_campaign=Badge_Grade)
+
 A Discord bot to submit prayer requests for the community to pray for.
 
 > You can tell the Lord that you love him anytime<br>
