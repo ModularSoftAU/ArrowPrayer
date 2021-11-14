@@ -1,0 +1,26 @@
+{
+  "name": "arrowprayer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ModularEnigma/ArrowPrayer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ModularEnigma/ArrowPrayer/issues"
+  },
+  "homepage": "https://github.com/ModularEnigma/ArrowPrayer#readme",
+  "dependencies": {
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0",
+    "wokcommands": "^1.5.3"
+  }
+}
