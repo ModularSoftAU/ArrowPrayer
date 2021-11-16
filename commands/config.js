@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { Discord, MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'config',
@@ -11,7 +11,7 @@ module.exports = {
         {
             "name": "setbotrole",
             "description": "Set the role for which role can configure the bot.",
-            "type": 1, // 1 is type SUB_COMMAND
+            "type": 1,
             "options": [
                 {
                     "name": "role",
@@ -47,44 +47,57 @@ module.exports = {
                 }
             ]
         },
-        {
-            "name": "blacklist",
-            "description": "Blacklist users abusing",
-            "type": 2,
-            "options": [
-                {
-                    "name": "add",
-                    "description": "Add a user to the blacklist.",
-                    "type": 1,
-                    "options": [
-                        {
-                            "name": "user",
-                            "description": "The user to blacklist.",
-                            "type": 6,
-                            "required": true
-                        }
-                    ]
-                },
-                {
-                    "name": "remove",
-                    "description": "Remove a user from the blacklist.",
-                    "type": 1,
-                    "options": [
-                        {
-                            "name": "user",
-                            "description": "The user to remove from the blacklist.",
-                            "type": 6,
-                            "required": true
-                        }
-                    ]
-                }
-            ]
-        },
     ],
     
     callback: ({ client, interaction }) => {
-        const guildConf = client.config.get(interaction.guild.id);
-        
-        interaction.reply(`BIG PONG\n ${guildConf}`);
+
+        // 
+        // /config setbotrole
+        // 
+        if (interaction.options.getSubcommand() === "setbotrole") {
+            const botRoleID = interaction.options.getRole('role').id;
+            const botRoleDisplayName = interaction.options.getRole('role').name;
+
+            try {
+                const embed = new MessageEmbed()
+                .setTitle(`The Bot Role has been set.`)
+                // .setColor(``)
+                .setDescription(`The bot role to control ArrowPrayer has been set to \`${botRoleDisplayName}\``)
+    
+                interaction.reply({
+                    embeds: [embed],
+                    ephemeral: true 
+                });
+                return
+            } catch (error) {
+                console.log(error);
+                return   
+            }
+        }
+
+
+        // 
+        // /config setprayerrequestchannel
+        // 
+        if (interaction.options.getSubcommand() === "setprayerrequestchannel") {
+            const requestChannelID = interaction.options.getChannel('requestchannel').id;
+            const requestChannelDisplayName = interaction.options.getChannel('requestchannel').name;
+
+            try {
+                const embed = new MessageEmbed()
+                .setTitle(`The Prayer Request channel has been set.`)
+                // .setColor(``)
+                .setDescription(`The channel where requests will go has been set to \`${requestChannelDisplayName}\``)
+    
+                interaction.reply({
+                    embeds: [embed],
+                    ephemeral: true 
+                });
+                return
+            } catch (error) {
+                console.log(error);
+                return   
+            }
+        }
     },
 }
