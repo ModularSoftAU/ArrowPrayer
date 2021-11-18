@@ -56,7 +56,7 @@ module.exports = {
         },
     ],
     
-    callback: ({ interaction }) => {
+    callback: ({ client, interaction }) => {
         // 
         // /config show
         // 
@@ -66,11 +66,14 @@ module.exports = {
                     if (error) {
                       throw error;
                     } else {
-                        console.log(results);
+                        let botRoleDisplayName = interaction.guild.roles.cache.get(results[0].botRole);
+                        let prayerRequestChannelDisplayName = interaction.guild.channels.cache.get(results[0].prayerRequestChannel);
+                        let prayerRequestLogChannelDisplayName = interaction.guild.channels.cache.get(results[0].prayerRequestLogChannel);
+
                         const embed = new MessageEmbed()
                         .setTitle(`${interaction.guild.name}'s Configuration`)
                         .setColor(`${config.colours.info}`)
-                        .setDescription(`botRole: ${results[0].botRole}\nprayerRequestChannel: ${results[0].prayerRequestChannel}\nprayerRequestLogChannel: ${results[0].prayerRequestLogChannel}`)
+                        .setDescription(`botRole: ${botRoleDisplayName}\nprayerRequestChannel: ${prayerRequestChannelDisplayName}\nprayerRequestLogChannel: ${prayerRequestLogChannelDisplayName}`)
             
                         interaction.reply({
                             embeds: [embed],
@@ -126,7 +129,7 @@ module.exports = {
             const requestChannelDisplayName = interaction.options.getChannel('requestchannel').name;
 
             try {
-                database.query (`UPDATE config SET botRole=? WHERE guildID=?;`, [botRoleID, interaction.guildId], function (error, results, fields) {
+                database.query (`UPDATE config SET prayerRequestChannel=? WHERE guildID=?;`, [requestChannelID, interaction.guildId], function (error, results, fields) {
                     if (error) {
                       throw error;
                     } else {
@@ -157,16 +160,22 @@ module.exports = {
             const requestLogChannelDisplayName = interaction.options.getChannel('logchannel').name;
 
             try {
-                const embed = new MessageEmbed()
-                .setTitle(`The Prayer Request Log channel has been set.`)
-                .setColor(`${config.colours.success}`)
-                .setDescription(`The channel where requests will be logged has been set to \`${requestLogChannelDisplayName}\``)
-    
-                interaction.reply({
-                    embeds: [embed],
-                    ephemeral: true 
-                });
-                return
+                database.query (`UPDATE config SET prayerRequestLogChannel=? WHERE guildID=?;`, [requestLogChannelID, interaction.guildId], function (error, results, fields) {
+                    if (error) {
+                      throw error;
+                    } else {
+                        const embed = new MessageEmbed()
+                        .setTitle(`The Prayer Request Log channel has been set.`)
+                        .setColor(`${config.colours.success}`)
+                        .setDescription(`The channel where requests will be logged has been set to \`${requestLogChannelDisplayName}\``)
+            
+                        interaction.reply({
+                            embeds: [embed],
+                            ephemeral: true 
+                        });
+                        return
+                    }
+                });                
             } catch (error) {
                 console.log(error);
                 return   
