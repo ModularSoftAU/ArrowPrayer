@@ -1,0 +1,11 @@
+DROP DATABASE IF EXISTS arrowprayer;
+CREATE DATABASE IF NOT EXISTS arrowprayer;
+USE arrowprayer;
+
+CREATE TABLE config (
+  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  guildID BIGINT(18) NOT NULL,
+  botRole BIGINT(18) DEFAULT NULL,
+  prayerRequestChannel BIGINT(18) DEFAULT NULL,
+  prayerRequestLogChannel BIGINT(18) DEFAULT NULL
+);

@@ -2,7 +2,11 @@ const { Discord, Client, Intents } = require('discord.js');
 const dotenv = require('dotenv');
 const WOKCommands = require('wokcommands');
 const path = require('path');
-const Enmap = require('enmap');
+
+//
+// Controllers
+//
+const database = require('./databaseController'); // Database controller
 
 dotenv.config();
 
@@ -26,26 +30,24 @@ client.on('ready', () => {
 
 client.on("guildCreate", guild => {
   // When the bot joins, create config.
-  client.config.delete(guild.id);
+  database.query (`INSERT INTO config (guildID) VALUES (?);`, [guild.id], function (error, results, fields) {
+    if (error) {
+      throw error;
+    } else {
+        console.log(`Guild created for ${guild.name} (${guild.id})`);
+    }
+  });
 });
 
 client.on("guildDelete", guild => {
   // When the bot leaves or is kicked, delete config to prevent stale entries.
-  client.config.delete(guild.id);
-});
-
-client.config = new Enmap({
-    name: "config",
-    fetchAll: false,
-    autoFetch: true,
-    cloneLevel: 'deep',
-
-    // 
-    guildID: null,
-    botRole: null,
-    prayerRequestChannel: null,
-    prayerRequestLogChannel: null,
-    blacklistedUsers: []
+  database.query (`DELETE FROM config WHERE guildID=?;`, [guild.id], function (error, results, fields) {
+    if (error) {
+      throw error;
+    } else {
+        console.log(`Guild deleted for ${guild.name} (${guild.id}) because bot was kicked.`);
+    }
   });
+});
 
 client.login(process.env.TOKEN);

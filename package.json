@@ -22,6 +22,7 @@
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "enmap": "github:eslachance/enmap#v3",
+    "mysql": "^2.18.1",
     "wokcommands": "^1.5.3"
   }
 }
