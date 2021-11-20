@@ -8,6 +8,7 @@ module.exports = {
     description: 'Submit a prayer request.',
     category: 'Testing',
     slash: true,
+    guildOnly: true,
     testOnly: true,
 
     options: [
@@ -33,7 +34,6 @@ module.exports = {
                   embeds: [databaseIssue],
                   ephemeral: true 
                 });
-
                 console.log(error);
                 return;
               } else {
@@ -103,20 +103,19 @@ module.exports = {
                     return
  
                   } catch (error) {
+                    console.log(error);
+
                     interaction.reply({
                       embeds: [channelNotSet],
                       ephemeral: true 
                     });
-
-                    console.log(error);
-                    return;
                   }
              }
           });
           return
       } catch (error) {
         interaction.reply({
-          embeds: [channelNotSet],
+          embeds: [databaseIssue],
           ephemeral: true 
         });
 

@@ -5,7 +5,6 @@ USE arrowprayer;
 CREATE TABLE config (
   id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
   guildID VARCHAR(18) NOT NULL,
-  botRole VARCHAR(18) DEFAULT NULL,
   prayerRequestChannel VARCHAR(18) DEFAULT NULL,
   prayerRequestLogChannel VARCHAR(18) DEFAULT NULL
 );

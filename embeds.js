@@ -11,7 +11,7 @@ const databaseIssue = new MessageEmbed()
 
 
 // 
-// Channot Not Set
+// Channel Not Set
 // 
 const channelNotSet = new MessageEmbed()
 .setTitle(`Error`)

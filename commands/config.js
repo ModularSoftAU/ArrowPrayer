@@ -4,9 +4,12 @@ const database = require('../databaseController');
 
 module.exports = {
     name: 'config',
+    aliases: ['conf'],
     description: 'Configuration command.',
-    category: 'Testing',
+    category: 'Configuration',
+    permissions: ['ADMINISTRATOR'],
     slash: true,
+    guildOnly: true,
     testOnly: true,
 
     options: [
@@ -14,19 +17,6 @@ module.exports = {
             "name": "show",
             "description": "Show the current configuration.",
             "type": 1
-        },
-        {
-            "name": "setbotrole",
-            "description": "Set the role for which role can configure the bot.",
-            "type": 1,
-            "options": [
-                {
-                    "name": "role",
-                    "description": "The role to configure the bot.",
-                    "type": 8,
-                    "required": true
-                }
-            ]
         },
         {
             "name": "setprayerrequestchannel",
@@ -66,14 +56,13 @@ module.exports = {
                     if (error) {
                       throw error;
                     } else {
-                        let botRoleDisplayName = interaction.guild.roles.cache.get(results[0].botRole);
                         let prayerRequestChannelDisplayName = interaction.guild.channels.cache.get(results[0].prayerRequestChannel);
                         let prayerRequestLogChannelDisplayName = interaction.guild.channels.cache.get(results[0].prayerRequestLogChannel);
 
                         const embed = new MessageEmbed()
                         .setTitle(`${interaction.guild.name}'s Configuration`)
                         .setColor(`${config.colours.info}`)
-                        .setDescription(`botRole: ${botRoleDisplayName}\nprayerRequestChannel: ${prayerRequestChannelDisplayName}\nprayerRequestLogChannel: ${prayerRequestLogChannelDisplayName}`)
+                        .setDescription(`Prayer Request Channel: ${prayerRequestChannelDisplayName}\nPrayer Request Log Channel: ${prayerRequestLogChannelDisplayName}`)
             
                         interaction.reply({
                             embeds: [embed],
@@ -91,37 +80,6 @@ module.exports = {
 
 
         // 
-        // /config setbotrole
-        // 
-        if (interaction.options.getSubcommand() === "setbotrole") {
-            const botRoleID = interaction.options.getRole('role').id;
-            const botRoleDisplayName = interaction.options.getRole('role').name;
-
-            try {
-                database.query (`UPDATE config SET botRole=? WHERE guildID=?;`, [botRoleID, interaction.guildId], function (error, results, fields) {
-                    if (error) {
-                      throw error;
-                    } else {
-                        const embed = new MessageEmbed()
-                        .setTitle(`The Bot Role has been set.`)
-                        .setColor(`${config.colours.success}`)
-                        .setDescription(`The bot role to control ArrowPrayer has been set to \`${botRoleDisplayName}\``)
-            
-                        interaction.reply({
-                            embeds: [embed],
-                            ephemeral: true 
-                        });
-                        return
-                    }
-                });
-            } catch (error) {
-                console.log(error);
-                return   
-            }
-        }
-
-
-        // 
         // /config setprayerrequestchannel
         // 
         if (interaction.options.getSubcommand() === "setprayerrequestchannel") {
@@ -129,7 +87,7 @@ module.exports = {
             const requestChannelDisplayName = interaction.options.getChannel('requestchannel').name;
 
             try {
-                database.query (`UPDATE config SET prayerRequestChannel=? WHERE guildID=?;`, [requestChannelID, interaction.guildId], function (error, results, fields) {
+                database.query (`SELECT * FROM config WHERE guildID=?; UPDATE config SET prayerRequestChannel=? WHERE guildID=?;`, [interaction.guildId, requestChannelID, interaction.guildId], function (error, results, fields) {
                     if (error) {
                       throw error;
                     } else {
@@ -160,7 +118,7 @@ module.exports = {
             const requestLogChannelDisplayName = interaction.options.getChannel('logchannel').name;
 
             try {
-                database.query (`UPDATE config SET prayerRequestLogChannel=? WHERE guildID=?;`, [requestLogChannelID, interaction.guildId], function (error, results, fields) {
+                database.query (`SELECT * FROM config WHERE guildID=?; UPDATE config SET prayerRequestLogChannel=? WHERE guildID=?;`, [interaction.guildId, requestLogChannelID, interaction.guildId], function (error, results, fields) {
                     if (error) {
                       throw error;
                     } else {
