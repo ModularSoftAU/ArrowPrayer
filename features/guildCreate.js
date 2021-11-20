@@ -1,3 +1,5 @@
+const database = require('../databaseController');
+
 module.exports = (client, instance) => {
     client.on("guildCreate", guild => {
         // When the bot joins, create config.

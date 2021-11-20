@@ -44,6 +44,19 @@ module.exports = {
                 }
             ]
         },
+        {
+            "name": "toggleprayerlogs",
+            "description": "Toggle Prayer Request logging.",
+            "type": 1,
+            "options": [
+                {
+                    "name": "toggle",
+                    "description": "Toggle for request logging.",
+                    "type": 5,
+                    "required": true
+                }
+            ]
+        },
     ],
     
     callback: ({ client, interaction }) => {
@@ -56,13 +69,29 @@ module.exports = {
                     if (error) {
                       throw error;
                     } else {
-                        let prayerRequestChannelDisplayName = interaction.guild.channels.cache.get(results[0].prayerRequestChannel);
                         let prayerRequestLogChannelDisplayName = interaction.guild.channels.cache.get(results[0].prayerRequestLogChannel);
 
                         const embed = new MessageEmbed()
                         .setTitle(`${interaction.guild.name}'s Configuration`)
                         .setColor(`${config.colours.info}`)
-                        .setDescription(`Prayer Request Channel: ${prayerRequestChannelDisplayName}\nPrayer Request Log Channel: ${prayerRequestLogChannelDisplayName}`)
+
+                        if (interaction.guild.channels.cache.get(results[0].prayerRequestChannel) == undefined) {
+                            embed.addField(`Prayer Request Channel`, `\`Not Yet Set\``)
+                        } else {
+                            embed.addField(`Prayer Request Channel`, `${interaction.guild.channels.cache.get(results[0].prayerRequestChannel)}`)
+                        };
+
+                        if (interaction.guild.channels.cache.get(results[0].prayerRequestLogChannel) == undefined) {
+                            embed.addField(`Prayer Request Channel Log`, `\`Not Yet Set\``)
+                        } else {
+                            embed.addField(`Prayer Request Channel Log`, `${interaction.guild.channels.cache.get(results[0].prayerRequestLogChannel)}`)
+                        };
+
+                        if (results[0].prayerLogEnable == 0) {
+                            embed.addField(`Prayer Request Channel Log Toggle`, `\`FALSE\``)
+                        } else {
+                            embed.addField(`Prayer Request Channel Log Toggle`, `\`TRUE\``)
+                        };
             
                         interaction.reply({
                             embeds: [embed],
@@ -72,6 +101,35 @@ module.exports = {
                     }
                 });
                 return
+            } catch (error) {
+                console.log(error);
+                return   
+            }
+        }
+
+        // 
+        // /config toggleprayerlogs
+        // 
+        if (interaction.options.getSubcommand() === "toggleprayerlogs") {
+            const toggleBoolean = interaction.options.getBoolean('toggle');
+
+            try {
+                database.query (`SELECT * FROM config WHERE guildID=?; UPDATE config SET prayerLogEnable=? WHERE guildID=?;`, [interaction.guildId, toggleBoolean, interaction.guildId], function (error, results, fields) {
+                    if (error) {
+                      throw error;
+                    } else {
+                        const embed = new MessageEmbed()
+                        .setTitle(`The Prayer Request Logs has been set.`)
+                        .setColor(`${config.colours.success}`)
+                        .setDescription(`The Prayer Request Logs have been set to \`${toggleBoolean}\``)
+            
+                        interaction.reply({
+                            embeds: [embed],
+                            ephemeral: true 
+                        });
+                        return
+                    }
+                });
             } catch (error) {
                 console.log(error);
                 return   

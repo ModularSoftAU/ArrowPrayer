@@ -1,3 +1,5 @@
+const database = require('../databaseController');
+
 module.exports = (client, instance) => {
     client.on("guildDelete", guild => {
         // When the bot leaves or is kicked, delete config to prevent stale entries.
