@@ -3,6 +3,7 @@ module.exports = (client, instance) => {
     let pluralnonpluralusers = (client.guilds.cache.size > 1) ? 'Users' : 'User';
 
     const statusOptions = [
+        "Use /pray to start praying!",
         "Developed by ModularEnigma",
         "http://www.modularenigma.com/",
         `Over ${client.guilds.cache.size} ${pluralnonpluralguild} praying!`,

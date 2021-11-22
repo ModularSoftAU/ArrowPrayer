@@ -7,18 +7,28 @@ const config = require('./config.json');
 const databaseIssue = new MessageEmbed()
 .setTitle(`Error`)
 .setColor(`${config.colours.danger}`)
-.setDescription(`There was a database issue, please try again later.`)
+.setDescription(`There was an issue fetching the guild configuration, please try again later.`)
 
 
 // 
-// Channel Not Set
+// Prayer Channel Not Set
 // 
-const channelNotSet = new MessageEmbed()
+const prayerChannelNotSet = new MessageEmbed()
 .setTitle(`Error`)
 .setColor(`${config.colours.danger}`)
-.setDescription(`There was an error in using this command, has the prayer channel been setup?\nUse \`/config show\``)
+.setDescription(`Unable to send, the Prayer channel has not been set. \nUse \`/config setPrayerRequestChannel\` to set the channel.`)
+
+
+// 
+// Prayer Log Channel Not Set
+// 
+const prayerLogChannelNotSet = new MessageEmbed()
+.setTitle(`Error`)
+.setColor(`${config.colours.danger}`)
+.setDescription(`Unable to send, the Prayer log channel has not been set. \nUse \`/config setPrayerRequestLogChannel\` to set the channel.`)
 
 module.exports = {
     databaseIssue,
-    channelNotSet
+    prayerChannelNotSet,
+    prayerLogChannelNotSet
 }
